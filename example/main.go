@@ -1,32 +1,18 @@
 package main
 
-type Bar interface {
-
-	bar()
+func main() {
+	f()
+	g(1)
+	FuncFromAnotherFile()
 }
 
-type Foo interface {
-
-
-}
-
-type S struct {}
-
-func (s *S) bar(){}
-
-func g(a int){
+func g(a int) int {
 	a = a + 1
+	return a
 }
 
-func f(){
+func f() {
 	b := 1
 	go g(b)
-	go g(b)
-	go g(b)
-	go func(){}()
-}
-
-func main(){
-	f()
-
+	go func() {}()
 }
