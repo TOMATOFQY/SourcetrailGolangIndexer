@@ -19,5 +19,5 @@ var logger = log.New(os.Stdout, "GLOBAL:\t", 0)
 func main() {
 	// test()
 	createCfg(sourceFilePath)
-	// cg(packagePath)
+	cg(packagePath)
 }

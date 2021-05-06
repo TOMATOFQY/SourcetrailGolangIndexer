@@ -2,7 +2,6 @@ package main
 
 import (
 	srctrl "bindings_golang"
-	"encoding/json"
 	"fmt"
 	"go/ast"
 	"go/parser"
@@ -105,8 +104,7 @@ func linkBlocks(funcDecl *ast.FuncDecl, b *cfg.Block, nb *cfg.Block) int {
 func registerBlock(funcDecl *ast.FuncDecl, b *cfg.Block) int {
 	nh := NameHierarchy{".", []NameElement{}}
 	nh.push_back(NameElement{"", funcDecl.Name.Name + " " + b.String(), ""})
-	symbol, _ := json.Marshal(nh)
-	symbolId := srctrl.RecordSymbol(string(symbol))
+	symbolId := srctrl.RecordSymbol(nh.string())
 	return symbolId
 }
 
@@ -117,8 +115,7 @@ func registerInstruction(funcDecl *ast.FuncDecl, b *cfg.Block, node *ast.Node) i
 	line := lines[position.Line-1]
 	line = strings.TrimLeft(line, "\t")
 	nh.push_back(NameElement{"", fmt.Sprintf("%v", position.Line) + " " + line, ""})
-	instructionSymbol, _ := json.Marshal(nh)
-	symbolId := srctrl.RecordSymbol(string(instructionSymbol))
+	symbolId := srctrl.RecordSymbol(nh.string())
 	srctrl.RecordSymbolKind(symbolId, srctrl.SYMBOL_FUNCTION)
 	return symbolId
 }

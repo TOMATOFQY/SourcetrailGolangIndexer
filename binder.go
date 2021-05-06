@@ -47,8 +47,7 @@ func registerFuncBySSA(k *ssa.Function) int {
 	nh := NameHierarchy{".", []NameElement{}}
 	nh.push_back(NameElement{pkg_name, k.Name(), k.Signature.Params().String() + Results})
 
-	symbol, _ := json.Marshal(nh)
-	symbolId := srctrl.RecordSymbol(string(symbol))
+	symbolId := srctrl.RecordSymbol(nh.string())
 	srctrl.RecordSymbolLocation(symbolId, fileId, position.Line, position.Column, position.Line, position.Column+len(k.Name())-1)
 	srctrl.RecordSymbolDefinitionKind(symbolId, srctrl.DEFINITION_EXPLICIT)
 	srctrl.RecordSymbolKind(symbolId, srctrl.SYMBOL_FUNCTION)
@@ -65,6 +64,11 @@ func (nh *NameHierarchy) push_back(e NameElement) {
 }
 func (nh *NameHierarchy) pop() {
 	nh.NameElements = nh.NameElements[:len(nh.NameElements)-1]
+}
+
+func (nh *NameHierarchy) string() string {
+	ret, _ := json.Marshal(nh)
+	return string(ret)
 }
 
 type NameElement struct {
