@@ -10,6 +10,7 @@ import (
 )
 
 func cg(packagePath string) {
+	srctrl.
 	if srctrl.Open(CGDatabaseFilePath) != true {
 		fmt.Printf("ERROR: %#v\n", srctrl.GetLastError())
 		return
