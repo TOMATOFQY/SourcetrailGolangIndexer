@@ -8,7 +8,7 @@ func main() {
 
 func f() {
 	b := 1
-	go g(b)
+	fib(b)
 	go func() {}()
 }
 

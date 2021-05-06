@@ -3,6 +3,7 @@ package main
 import (
 	srctrl "bindings_golang"
 	"fmt"
+	"go/ast"
 
 	"golang.org/x/tools/go/callgraph/cha"
 	"golang.org/x/tools/go/packages"
@@ -10,7 +11,6 @@ import (
 )
 
 func cg(packagePath string) {
-	srctrl.
 	if srctrl.Open(CGDatabaseFilePath) != true {
 		fmt.Printf("ERROR: %#v\n", srctrl.GetLastError())
 		return
@@ -19,10 +19,6 @@ func cg(packagePath string) {
 	srctrl.Clear()
 
 	srctrl.BeginTransaction()
-	// fileId := srctrl.RecordFile(sourceFilePath)
-	// srctrl.RecordFileLanguage(fileId, "golang") // doesn't support golang yet
-
-	// sgi.Analyze(packagePath)
 	{
 		cfg := &packages.Config{
 			Mode:  packages.LoadAllSyntax,
@@ -38,15 +34,15 @@ func cg(packagePath string) {
 		prog, _ := ssautil.AllPackages(initial, 0)
 		prog.Build()
 
-		cg_cha := cha.CallGraph(prog)
+		cg := cha.CallGraph(prog)
 
-		for k, v := range cg_cha.Nodes {
+		ast.Print(nil, cg)
+
+		for k, v := range cg.Nodes {
 			if k != nil && k.Name() != "init" {
-				// logger.Println("CALLER:", k.Name())
 				registerFuncBySSA(k)
 				if len(v.Out) > 0 {
 					for _, e := range v.Out {
-						// logger.Println("CALLEE:", e.Callee.Func.Name())
 						registerFuncBySSA(e.Callee.Func)
 						registerCallByEdge(e)
 					}

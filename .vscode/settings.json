@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"*.rkt": "racket",
+		"*.py": "python",
+		"*.tcc": "cpp",
+		"algorithm": "cpp",
+		"random": "cpp",
+		"regex": "cpp",
+		"variant": "cpp"
+	}
+}

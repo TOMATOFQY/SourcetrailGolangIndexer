@@ -1,5 +1,5 @@
 package main
 
 func FuncFromAnotherFile() {
-	g(42)
+	fib(42)
 }
