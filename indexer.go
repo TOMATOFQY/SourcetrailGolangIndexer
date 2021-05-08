@@ -49,31 +49,31 @@ func (i Indexer) registerCallByEdge(e *callgraph.Edge) int {
 	return referenceId
 }
 
-func (i Indexer) registerFunc(k *ssa.Function) int {
+func (i Indexer) registerFunc(f *ssa.Function) int {
 	i.BeginTransaction()
 	defer i.CommitTransaction()
 
-	prog := k.Prog
-	position := prog.Fset.Position(k.Pos())
+	prog := f.Prog
+	position := prog.Fset.Position(f.Pos())
 
 	fileId := srctrl.RecordFile(position.Filename)
 	srctrl.RecordFileLanguage(fileId, "cpp")
 
 	pkg_name := ""
-	if k.Pkg != nil && k.Pkg.Pkg != nil {
-		pkg_name = k.Pkg.Pkg.Name()
+	if f.Pkg != nil && f.Pkg.Pkg != nil {
+		pkg_name = f.Pkg.Pkg.Name()
 	}
 
-	Results := k.Signature.Results().String()
+	Results := f.Signature.Results().String()
 	if Results == "()" {
 		Results = ""
 	}
 
 	nh := NameHierarchy{".", []NameElement{}}
-	nh.push_back(NameElement{pkg_name, k.Name(), k.Signature.Params().String() + Results})
+	nh.push_back(NameElement{pkg_name, f.Name(), f.Signature.Params().String() + Results})
 
 	symbolId := srctrl.RecordSymbol(nh.string())
-	srctrl.RecordSymbolLocation(symbolId, fileId, position.Line, position.Column, position.Line, position.Column+len(k.Name())-1)
+	srctrl.RecordSymbolLocation(symbolId, fileId, position.Line, position.Column, position.Line, position.Column+len(f.Name())-1)
 	srctrl.RecordSymbolDefinitionKind(symbolId, srctrl.DEFINITION_EXPLICIT)
 	srctrl.RecordSymbolKind(symbolId, srctrl.SYMBOL_FUNCTION)
 	return symbolId

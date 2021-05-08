@@ -1,3 +1,4 @@
-rm ./output/cg.srctrlprj
-go run .
-sourcetrail ./output/cg.srctrlprj
+PWD=`pwd`
+rm $PWD/example/cg.*
+go run . -pkgPath=$PWD/example
+sourcetrail ./example/cg.srctrlprj

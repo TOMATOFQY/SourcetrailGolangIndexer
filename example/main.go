@@ -15,14 +15,3 @@ func fib(n int) int {
 	}
 	return fib(n-1) + fib(n-1)
 }
-
-type I interface{ g() }
-
-type S struct{ a int }
-
-func (s S) g() {}
-
-type T struct{ a int }
-
-func (t T) g() {}
-func (t T) h() {}
