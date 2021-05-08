@@ -8,8 +8,6 @@ import (
 )
 
 func cg(packagePath string) {
-	indexer.Open()
-	defer indexer.Close()
 
 	prog := createProg(packagePath)
 
