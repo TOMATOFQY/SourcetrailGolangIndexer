@@ -9,7 +9,7 @@ var indexer Indexer
 
 func main() {
 	path, _ := os.Getwd()
-	pkgPath := path + "/example"
+	pkgPath := path + "/../example"
 	debug := false
 	flag.StringVar(&pkgPath, "pkgPath", pkgPath, "The absolute path for target package. Redirect to the example folder by default.\n")
 	flag.BoolVar(&debug, "debug", false, "Print log or not.")

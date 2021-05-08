@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"sync"
 
 	srctrl "SourcetrailGolangIndexer/bindings_golang"
 
@@ -12,6 +13,7 @@ import (
 
 type Indexer struct {
 	DatabasePath string
+	wg           sync.WaitGroup
 }
 
 func (i Indexer) Open() error {
@@ -31,6 +33,7 @@ func (i Indexer) CommitTransaction() {
 }
 
 func (i Indexer) Close() {
+	i.wg.Wait()
 	srctrl.Close()
 }
 
@@ -51,6 +54,7 @@ func (i Indexer) registerCallByEdge(e *callgraph.Edge) int {
 }
 
 func (i Indexer) registerFunc(f *ssa.Function) int {
+	i.wg.Add(1)
 	i.BeginTransaction()
 	defer i.CommitTransaction()
 
@@ -77,6 +81,7 @@ func (i Indexer) registerFunc(f *ssa.Function) int {
 	srctrl.RecordSymbolLocation(symbolId, fileId, position.Line, position.Column, position.Line, position.Column+len(f.Name())-1)
 	srctrl.RecordSymbolDefinitionKind(symbolId, srctrl.DEFINITION_EXPLICIT)
 	srctrl.RecordSymbolKind(symbolId, srctrl.SYMBOL_FUNCTION)
+	i.wg.Done()
 	return symbolId
 }
 

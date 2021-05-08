@@ -1,6 +1,6 @@
 package sourcetraildb
 
 /*
-#cgo LDFLAGS:  -ldl -lSourcetraildb -ldl
+#cgo LDFLAGS:  -L. -lSourcetraildb -ldl
 */
 import "C"
