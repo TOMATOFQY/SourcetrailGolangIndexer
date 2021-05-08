@@ -1,5 +1,5 @@
 # SourcetrailGolangIndexer
 
-A version which support create Control Flow Graph.
+A version which supports creating Control Flow Graph.
 
 ![](./img/createCfg.png)
