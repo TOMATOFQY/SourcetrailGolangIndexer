@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../resources_swig/include/sourcetraildb.h
+string
+-
+
+/home/tomatofaq/go/src/github.com/CoatiSoftware/SourcetrailDB-master/resources_swig/interface/sourcetraildb.i
+std_string.i
+/home/tomatofaq/go/src/github.com/CoatiSoftware/SourcetrailDB-master/resources_swig/interface/std_string.i
+sourcetraildb.h
+/home/tomatofaq/go/src/github.com/CoatiSoftware/SourcetrailDB-master/resources_swig/interface/sourcetraildb.h
+sourcetraildb.h
+/home/tomatofaq/go/src/github.com/CoatiSoftware/SourcetrailDB-master/resources_swig/interface/sourcetraildb.h
+

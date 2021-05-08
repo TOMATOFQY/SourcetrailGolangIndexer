@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 )
 
@@ -15,7 +14,7 @@ func main() {
 	flag.StringVar(&pkgPath, "pkgPath", pkgPath, "The absolute path for target package. Redirect to the example folder by default.\n")
 	flag.BoolVar(&debug, "debug", false, "Print log or not.")
 	flag.Parse()
-	fmt.Println(debug)
+
 	indexer.DatabasePath = pkgPath + "/cg.srctrldb"
 	indexer.Open()
 	defer indexer.Close()

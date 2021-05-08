@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -std=c++11 -pthread -fPIC  -shared -Wl,-soname,libSourcetraildb.so -o libSourcetraildb.so CMakeFiles/bindings_golang.dir/src/sourcetraildbGO_wrap.cxx.o CMakeFiles/bindings_golang.dir/__/resources_swig/src/sourcetraildb.cpp.o  ../core/libsourcetraildb.a 

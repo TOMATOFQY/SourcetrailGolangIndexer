@@ -1,9 +1,10 @@
 package main
 
 import (
-	srctrl "bindings_golang"
 	"encoding/json"
 	"fmt"
+
+	srctrl "SourcetrailGolangIndexer/bindings_golang"
 
 	"golang.org/x/tools/go/callgraph"
 	"golang.org/x/tools/go/ssa"
