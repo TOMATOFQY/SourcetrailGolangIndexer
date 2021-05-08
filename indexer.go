@@ -3,19 +3,41 @@ package main
 import (
 	srctrl "bindings_golang"
 	"encoding/json"
-	"go/ast"
+	"fmt"
 
 	"golang.org/x/tools/go/callgraph"
 	"golang.org/x/tools/go/ssa"
 )
 
-func registerFuncCFGbyFile(file *ast.File) {
-
+type Indexer struct {
+	DatabasePath string
 }
 
-func registerCallByEdge(e *callgraph.Edge) int {
-	callerId := registerFuncBySSA(e.Caller.Func)
-	calleeId := registerFuncBySSA(e.Callee.Func)
+func (i Indexer) Open() error {
+	if !srctrl.Open(i.DatabasePath) {
+		return fmt.Errorf("ERROR: %#v", srctrl.GetLastError())
+	}
+	srctrl.Clear()
+	return nil
+}
+
+func (i Indexer) BeginTransaction() {
+	srctrl.BeginTransaction()
+}
+
+func (i Indexer) CommitTransaction() {
+	srctrl.CommitTransaction()
+}
+
+func (i Indexer) Close() {
+	srctrl.Close()
+}
+
+func (i Indexer) registerCallByEdge(e *callgraph.Edge) int {
+	i.BeginTransaction()
+	defer i.CommitTransaction()
+	callerId := i.registerFunc(e.Caller.Func)
+	calleeId := i.registerFunc(e.Callee.Func)
 	referenceId := srctrl.RecordReference(callerId, calleeId, srctrl.REFERENCE_CALL)
 
 	p := e.Site.Pos()
@@ -27,7 +49,10 @@ func registerCallByEdge(e *callgraph.Edge) int {
 	return referenceId
 }
 
-func registerFuncBySSA(k *ssa.Function) int {
+func (i Indexer) registerFunc(k *ssa.Function) int {
+	i.BeginTransaction()
+	defer i.CommitTransaction()
+
 	prog := k.Prog
 	position := prog.Fset.Position(k.Pos())
 

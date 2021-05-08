@@ -1,2 +1,3 @@
-go run main.go
-sourcetrail ./output/example.srctrlprj
+rm ./output/cg.srctrlprj
+go run .
+sourcetrail ./output/cg.srctrlprj
