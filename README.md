@@ -16,6 +16,10 @@ Currently, this project is still in a prototype state, but you can already run i
 
 Just check `run.sh` or run it directly. This project is absolutely rely on the native tools supported by golang.org without third-party dependency.
 
+After execute `runs.sh`, you should have this:
+
+![](./img/example.png)
+
 For usage of Sourcetrail, please check its official website.
 
 ## TOOD

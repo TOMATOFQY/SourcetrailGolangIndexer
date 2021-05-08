@@ -1,6 +1,7 @@
 package main
 
 func main() {
+	go func() {}()
 	f()
 	fib(42)
 	FuncFromAnotherFile()
