@@ -6,29 +6,27 @@ Golang Indexer for Sourcetrail.
 
 ## Description
 
-> **Updated at 2022.3.10**
-> After finished runnable version of this extension at the April of 2021, I found he master branch of this project has been archived, so I cannot make a pull request. And since it had been archived, there will not be any progress on the project anymore.
-> 
-> If you are interested in this extension and found it lacks a CMakefiles.txt for Golang, you can just copy CMakefiles.txt from the official repository cand replace the language name by Golang, like Python => Golang. There is no big change in this part so actually it won't be a big deal.
-> 
-> Plus, there are more heuristic project today like goplantuml which act similar function but has standard plantuml output. Those projects may be the one you are looking for at this point.
-
-The SourcetrailGolangIndexer is a Sourcetrail language extension supply Golang support to Sourcetrail.
-
-Currently, this project is still in a very early state, but by using this you can already build correct Call Graph on your Golang project.
-
+The SourcetrailGolangIndexer is a language extension for Sourcetrail that provides support for Golang. Although this project is still in its early stages, it allows you to generate an accurate call graph for your Golang project.
 ## Setup
 
-> It could only be excuted on linux now (exactly, Debian), the whole bindings will be published very soon then you can recompile the bindings on your platform.
+Currently, the SourcetrailGolangIndexer can only be executed on Linux, specifically Debian. However, the complete bindings will be released soon, which will allow you to recompile them on your platform.
 
-Just check `run.sh` or run it directly. This project absolutely depends on native tools supported by golang.org without third-party dependency.
+To run the SourcetrailGolangIndexer, you can either check the `run.sh` script or execute it directly. It's worth noting that this project relies solely on native tools supported by golang.org and doesn't have any third-party dependencies.
 
-After executing `runs.sh`, you should have this:
+Once you have executed the `run.sh` script, you should have the following:
 
 ![](./img/example.png)
 
-For usage of Sourcetrail, please check its official website.
+For information on how to use Sourcetrail, please refer to its official website.
 
 ## TOOD
 
 - Add support for class hierachy.
+
+## WARNING
+
+As of March 10th, 2022, I have completed a runnable version of this extension, which was finalized in April 2021. However, I discovered that the master branch of the project has since been archived, meaning I cannot make a pull request. Unfortunately, this also means that there will be no further progress on the project.
+
+If you're interested in this extension and find that it lacks a CMakeFiles.txt for Golang, you can simply copy the CMakeFiles.txt from the official repository and replace the language name with Golang (e.g. Python => Golang). Since this part hasn't changed much, it shouldn't be a big issue.
+
+Additionally, there are other heuristic projects like goplantuml that perform similar functions, but with standard plantuml output. You may find these projects to be more suitable for your needs.
